@@ -18,16 +18,14 @@ class Modelo():
         self.y_test_lr = None
 
     def CarregarDataset(self, path):
-        """
-        Carrega o conjunto de dados a partir de um arquivo CSV.
-        """
+
+        #Carrega o conjunto de dados a partir do dataset
         names = ['SepalLengthCm', 'SepalWidthCm', 'PetalLengthCm', 'PetalWidthCm', 'Species']
         self.df = pd.read_csv(path, names=names)
 
     def TratamentoDeDados(self):
-        """
-        Realiza o pré-processamento dos dados carregados.
-        """
+
+        #Realiza o pré-processamento dos dados
         # Visualizar as primeiras linhas do dataset
         print("Primeiras linhas do dataset:")
         print(self.df.head())
@@ -41,9 +39,8 @@ class Modelo():
         self.df['Species'] = label_encoder.fit_transform(self.df['Species'])
 
     def Treinamento(self):
-        """
-        Treina os modelos de machine learning.
-        """
+
+        #Treina os modelos de machine learning
         # Separar variáveis independentes e dependentes para classificação
         X = self.df.drop(columns='Species')
         y = self.df['Species']
@@ -73,9 +70,8 @@ class Modelo():
         self.model_lr.fit(X_train_lr, y_train_lr)
 
     def Teste(self):
-        """
-        Avalia o desempenho dos modelos treinados nos dados de teste.
-        """
+
+        #Avalia o desempenho dos modelos treinados nos dados de teste
         # Avaliar o modelo SVC
         y_pred_svc = self.model_svc.predict(self.X_test_svc)
         accuracy_svc = accuracy_score(self.y_test_svc, y_pred_svc)
@@ -87,9 +83,8 @@ class Modelo():
         print("Erro quadrático médio do modelo Linear Regression nos dados de teste:", mse_lr)
 
     def Train(self):
-        """
-        Função principal para o fluxo de treinamento do modelo.
-        """
+
+        #Função principal para o fluxo de treinamento do modelo
         self.CarregarDataset(file_path)
         self.TratamentoDeDados()
         self.Treinamento()
